@@ -17,6 +17,8 @@
 
 unsigned long int startTime = 0, endTime = 0;
 unsigned char prevSelector = 0;
+float startAngle, targetAngle;
+unsigned char rotState = 0;
 
 void setup() {
 
@@ -99,6 +101,23 @@ void loop() {
             setLeftSpeed(25);
             setRightSpeed(25);
             break;
+
+    case 6:
+            switch(rotState) {
+              case 0:
+                targetAngle = theta + PI;            
+                setLeftSpeed(-10);
+                setRightSpeed(10);
+                rotState = 1;
+                break;
+              case 1:
+                if(theta >= targetAngle) {
+                  setLeftSpeed(0);
+                  setRightSpeed(0);
+                }
+                break;
+            }
+            break;            
   
   }
 
